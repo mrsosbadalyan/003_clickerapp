@@ -1,24 +1,35 @@
 <template>
   <div>
-  <h2>{{count}}</h2>
-  <button @click="increment">1000 clicks are you will calm down</button>
+  <h1>{{state.count}}</h1>
+  <h2>Click up 500 times and you will calm down</h2>
+  <button @click="count_update(true)">Click up</button>
+  <h2>If not yet, click back 500 times and you will surely calm down</h2>
+  <button @click="count_update(false)">Click down</button>
+  
   </div>
 </template>
 
 <script>
-import {ref} from 'vue'; 
+import {reactive} from 'vue'; 
+import './App.css';
 
 export default {
   setup () {
-    const count = ref(0);
+    const state = reactive ({
+      count: 0,
+    });
 
-    function increment() {
-      count.value++;
+    function count_update(increase) {
+      if (increase)
+        state.count++;
+      else 
+        state.count--;
     }
 
+
     return {
-      count,
-      increment
+      state,
+      count_update
     }
   }
 }
